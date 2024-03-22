@@ -8,6 +8,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="${pageContext.request.contextPath}/resources/css/slide.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript">
+$(document).ready(function(){
+    localStorage.setItem("errstack", "0");
+});
+
+</script>
+
 </head>
 <body>
 

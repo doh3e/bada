@@ -8,7 +8,7 @@
 
 .main {
     width: 350px;
-    height: 300px;
+    height: 450px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,12 +18,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* 수평 및 수직으로 50% 이동하여 가운데 정렬 */
+    transform: translate(-50%, -50%); 
     
-}
-
-.parent-container {
-    position: relative; /* 부모 요소를 relative로 설정 */
 }
 
 .logo {
@@ -31,31 +27,67 @@
     margin-bottom: 40px;
 }
 
-.account {
+.input_field, .button_field {
     display: block;
-    margin: 5px 0;
-    margin-bottom: 3px;
+    width: 100%; 
+    margin: 5px 10px;
     padding: 3px;
     border: 1px solid lightgray;
-    border-radius: 3px;
-    width: calc(100% - 10px);
+    box-sizing: border-box;
 }
 
-.account input {
-    width: 100%;
+.input_field {
+    height: 40px; 
+    border-radius: 3px; 
 }
+
+.button_field {
+    margin-bottom: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    background-color: skyblue;
+}        
+          
 
 .container {
     display: flex;
-    flex-direction: column; /* 입력 필드와 버튼들을 수직으로 배치 */
-    align-items: center; /* 수직정렬 */
-    margin-top: 20px; /* 버튼과 입력 필드 사이의 간격 조절 */
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.forgot {
+    display: block; 
+    margin-top: 20px;
+    font-weight: bold;
+    color: skyblue;
+    text-decoration: none;
+}
+
+.div_line {
+ width : 100%;
+ border-bottom: 1px solid lightgrey;
+ margin: 20px 0 7px;
 }
 
 
-#sign #login_search {
-    width: 32%;
+
+.remember_id {
+    display: flex; 
+    align-items: center; 
+    justify-content: flex-start;
+    margin-top: 10px; 
+    margin-bottom: 20px;
+    width: 100%;
 }
+
+
+.remember_id label {
+    margin-left: 5px;
+    font-size: 0.8em;
+}
+
 
 
 #login {
@@ -66,18 +98,12 @@
 }
 
 #sign {
-    width: 50%;
+    width: 100%;
     background-color: #fba600;
     border-color: transparent;
     color: white;
 }
 
-#login_search {
-    width: 50%;
-    background-color: #0B909E;
-    border-color: transparent;
-    color: white;
-}
 
 
 </style>
@@ -89,13 +115,34 @@
 
 $(document).ready(function(){
 	
-	var errstack = 0;
+	var errstack = parseInt(localStorage.getItem("errstack") || "0");
+	
+	  if(localStorage.getItem("remember") === "true") {
+	        $("#remember").prop('checked', true);
+	        $("#id").val(localStorage.getItem("savedId"));
+	    } else {
+	        $("#remember").prop('checked', false);
+	        $("#id").val('');
+	    }
+	
 	
 	$("#login").click(function(){
 		
 		var id = $("#id").val();
 		var pw = $("#pw").val();
 		
+		
+		if(id=="") {
+			alert("아이디를 입력해주세요!");
+			$("#id").focus();
+			return;
+		}
+		
+		if(pw==""){
+			alert("비밀번호를 입력해주세요!");
+			$("#pw").focus();
+			return;
+		}
 		
 		$.ajax({
 			
@@ -109,6 +156,7 @@ $(document).ready(function(){
 				if(result=="no"){
 					
 					errstack ++;
+					localStorage.setItem("errstack", errstack.toString());
 					
 					if(errstack>=3){
 						alert("로그인 3회 오류! 회원가입/회원정보 찾기 창으로 이동합니다!")
@@ -122,6 +170,7 @@ $(document).ready(function(){
 				}
 				else{
 					alert(id+"님, 로그인 되었습니다!")
+					localStorage.setItem("errstack", "0");
 					window.location.replace("./")
 				}	
 			},
@@ -131,6 +180,17 @@ $(document).ready(function(){
 			}
 			
 		});
+		
+		
+	     if($("#remember").is(":checked")){
+	            localStorage.setItem("savedId", id);
+	            localStorage.setItem("remember", "true");
+	        } else {
+	            localStorage.removeItem("savedId");
+	            localStorage.setItem("remember", "false");
+	        }
+		
+		
 	});
 	
 });
@@ -144,12 +204,20 @@ $(document).ready(function(){
 <div class="main">
         <h1 class="logo">bada_login</h1>
         <div class="container">
-            <input type="text" name="id" placeholder="ID" id="id" class="account">
-            <input type="password" name="pw" placeholder="Password" id="pw" class="account">
-            	<button id="login" class="account">로그인</button>
-            	<button id="login_search" class="account">회원정보찾기</button>
-            	<button id="sign" class="account">회원가입</button>
+            <input type="text" name="id" placeholder="ID" id="id" class="input_field">
+            <input type="password" name="pw" placeholder="Password" id="pw" class="input_field">
+                 <div class="remember_id" style="margin-bottom: 20px;">
+   					 <input type="checkbox" id="remember" name="remember">
+  					 <label for="remember">아이디 저장하기</label>
+				</div>
+               
+            	<button id="login" class="button_field">로그인</button>
+            	<button id="sign" class="button_field">회원가입</button>
 
+			<div class="div_line"></div>
+			<div class="search_info">
+                    <a class="forgot" href="location.href='info_search'">아이디 / 비밀번호를 잊으셨나요?</a>
+            </div>
         </div>
     </div>   
 
