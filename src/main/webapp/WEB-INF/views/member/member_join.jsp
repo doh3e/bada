@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 
 
-
-
 <!DOCTYPE html>
 
 <html>
@@ -81,6 +79,18 @@
 		        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 		        if (!emailPattern.test(email)) {
 		            alert("올바른 이메일 형식이 아닙니다.");
+		            return false;
+		        }
+		        
+		     	// 성별 선택 확인
+		        if (!$("input[name='gender']").is(":checked")) {
+		            alert("성별을 선택해주세요.");
+		            return false;
+		        }
+
+		        // 연령대 선택 확인
+		        if ($("#age").val() == "") {
+		            alert("연령대를 선택해주세요.");
 		            return false;
 		        }
 		
