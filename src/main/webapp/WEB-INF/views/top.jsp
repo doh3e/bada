@@ -11,9 +11,6 @@
 <script src="https://kit.fontawesome.com/097b31c9b8.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<header>
-이곳은 제목 부분...
-</header>
 <nav class="navbar">
 	<div class="navbar__logo">
 		<a href="./">바라는 바다!</a>
@@ -27,6 +24,14 @@
 			</ul>
 			</div>
 		</li>
+			<li class="navbar__menud"><a href="#">바다정보</a>
+			<div class="navbar__dropdown">
+			<ul>
+				<li class="navbar__dropdownli"><a href="#">바다정보</a></li>
+				<li class="navbar__dropdownli"><a href="#">후기정보</a></li>
+			</ul>
+			</div>
+		</li>
 	</ul>
 	<ul class="navbar__icons">
 
@@ -36,17 +41,14 @@
 		<a href="mypage">${loginid} 님의<br>마이페이지</a>
 		</li>
 		<li class="navbar__menud">
-		<i class="fa-solid fa-right-from-bracket" style="color: #ddf2ea;"></i>
 		<a href="logout">로그아웃</a>
 		</li>
 	</c:when>
 	<c:otherwise>
 		<li class="navbar__menud">
-		<i class="fa-solid fa-user-plus" style="color: #ddf2ea;"></i>
-		<a href="member_input">가입하기</a>
+		<a href="member_join">가입하기</a>
 		</li>
 		<li class="navbar__menud">
-		<i class="fa-solid fa-right-to-bracket" style="color: #ddf2ea;"></i>
 		<a href="login">로그인</a>
 		</li>
 	</c:otherwise>

@@ -1,5 +1,8 @@
 package com.ezen.bada.member;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class MemberController {
-
+	
 	@Autowired
 	SqlSession sqlsession;
 	
@@ -25,12 +28,19 @@ public class MemberController {
 		return "member_join";
 	}
 	
-	
+
 	
 	@RequestMapping(value = "/login")
 	public String login1() {
 		
 		return "login";
+	}
+	
+	
+	@RequestMapping(value = "/info_search")
+	public String search_login() {
+		
+		return "info_search";
 	}
 	
 	
@@ -43,6 +53,10 @@ public class MemberController {
 		
 		Service ss = sqlsession.getMapper(Service.class);
 		String logincount = ss.login_check(id,pw);
+		
+		System.out.println("�α��� �õ� ���̵� : "+id);
+		System.out.println("�α��� �õ� ��� : "+pw);
+		System.out.println("�α��� ��� : "+logincount);
 		
 		
 		String result = "";
@@ -61,9 +75,55 @@ public class MemberController {
 			result = "yes";
 		}
 	
+		System.out.println("��� : "+result);
 		
 		return result;
 	}
+
+	
+	@ResponseBody
+	@RequestMapping(value = "/idcheck")
+	public String idcheck(HttpServletRequest request) {
+		
+		String id = request.getParameter("id");
+		Service ss=sqlsession.getMapper(Service.class);
+		String result=""; //originid�� ���� ���η� ����� result�� ��ȯ�ϱ� ���� ���� ����
+		String originid="";
+		
+		System.out.println("���� ���̵� : "+id);
+		
+		originid=ss.idcheck(id); //originid: table �ȿ��� ������ ������ �����ϴ� id
+		if(originid==null) {result="ok";} //�ߺ��� ���̵� ���� ���
+		else {result="nope";} //�ߺ��� ���̵� ���� ���	
+
+		System.out.println("sql��� : "+originid);
+		System.out.println("������� : "+result);
+		
+		return result;
+	} //public String idcheck ��
+	
+	
+	
+	@RequestMapping(value = "/member_save", method = RequestMethod.POST)
+	public String membersave(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		String id = request.getParameter("id");
+        String pw = request.getParameter("pw");
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String gender = request.getParameter("gender");
+        String age = request.getParameter("age");
+
+        Service ss=sqlsession.getMapper(Service.class);
+        ss.membersave(id, pw, name, email, gender, age);
+ 	
+		return "main";
+	}
+	
+	
+	
+	
+	
 	
 	
 }

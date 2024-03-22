@@ -159,8 +159,8 @@ $(document).ready(function(){
 					localStorage.setItem("errstack", errstack.toString());
 					
 					if(errstack>=3){
-						alert("로그인 3회 오류! 회원가입/회원정보 찾기 창으로 이동합니다!")
-						window.location="sign" // 회원가입창으로 이동 or (회원정보 찾기)
+						alert("로그인 3회 오류! 회원정보 찾아드릴게요!")
+						window.location="info_search" // 회원가입창으로 이동 or (회원정보 찾기)
 					}
 					else{
 						alert("일치하는 회원정보가 존재하지 않습니다!")
@@ -216,7 +216,7 @@ $(document).ready(function(){
 
 			<div class="div_line"></div>
 			<div class="search_info">
-                    <a class="forgot" href="location.href='info_search'">아이디 / 비밀번호를 잊으셨나요?</a>
+                    <a class="forgot" onclick="location.href='info_search'">아이디 / 비밀번호를 잊으셨나요?</a>
             </div>
         </div>
     </div>   

@@ -1,6 +1,8 @@
 package com.ezen.bada.member;
 
 public class MemberDTO {
+	
+	
 
 	String id,pw;
 
