@@ -54,9 +54,15 @@ public class MemberController {
 		Service ss = sqlsession.getMapper(Service.class);
 		String logincount = ss.login_check(id,pw);
 		
+<<<<<<< HEAD
 		System.out.println("�α��� �õ� ���̵� : "+id);
 		System.out.println("�α��� �õ� ��� : "+pw);
 		System.out.println("�α��� ��� : "+logincount);
+=======
+		System.out.println("로그인 시도 아이디 : "+id);
+		System.out.println("로그인 시도 비밀번호 : "+pw);
+		System.out.println("로그인체크 : "+logincount);
+>>>>>>> 3f6088f8b43f4a8553153006873e7251bc326464
 		
 		
 		String result = "";
@@ -75,7 +81,11 @@ public class MemberController {
 			result = "yes";
 		}
 	
+<<<<<<< HEAD
 		System.out.println("��� : "+result);
+=======
+		System.out.println("결과 : "+result);
+>>>>>>> 3f6088f8b43f4a8553153006873e7251bc326464
 		
 		return result;
 	}
@@ -87,20 +97,34 @@ public class MemberController {
 		
 		String id = request.getParameter("id");
 		Service ss=sqlsession.getMapper(Service.class);
+<<<<<<< HEAD
 		String result=""; //originid�� ���� ���η� ����� result�� ��ȯ�ϱ� ���� ���� ����
+=======
+		String result=""; //originid로 얻어온 결과로 if문 실행
+>>>>>>> 3f6088f8b43f4a8553153006873e7251bc326464
 		String originid="";
 		
 		System.out.println("���� ���̵� : "+id);
 		
+<<<<<<< HEAD
 		originid=ss.idcheck(id); //originid: table �ȿ��� ������ ������ �����ϴ� id
 		if(originid==null) {result="ok";} //�ߺ��� ���̵� ���� ���
 		else {result="nope";} //�ߺ��� ���̵� ���� ���	
+=======
+		originid=ss.idcheck(id); //originid: table에서 id로 select where 해서 나온 값
+		if(originid==null) {result="ok";} // 결과가 null이면 ok반환
+		else {result="nope";} //select 결과가 있으면 nope 반환
+>>>>>>> 3f6088f8b43f4a8553153006873e7251bc326464
 
 		System.out.println("sql��� : "+originid);
 		System.out.println("������� : "+result);
 		
 		return result;
+<<<<<<< HEAD
 	} //public String idcheck ��
+=======
+	} //idcheck 종료
+>>>>>>> 3f6088f8b43f4a8553153006873e7251bc326464
 	
 	
 	
@@ -133,12 +157,12 @@ public class MemberController {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 	    PrintWriter out = response.getWriter();
-	    out.print("<script type='text/javascript'> alert('�α׾ƿ� �Ǿ����ϴ�!'); window.location.replace('main')");
+	    out.print("<script type='text/javascript'> alert('로그아웃 되었습니다!'); window.location.replace('main')");
 	    out.print("</script>");
 		
 		
 		return null;
-	} //logout ��
+	} //logout ��
 	
 	
 	
