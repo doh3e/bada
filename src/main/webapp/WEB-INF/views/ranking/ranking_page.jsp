@@ -42,17 +42,23 @@
             url: 'generateGraph',
             type: 'GET',
             success: function(imgRelativePath) {
-                $('#graphContainer').empty();
-                // 새로운 이미지 추가
+            	
+                // 새로운 이미지 추가    
                 $('#graphContainer').html('<img src="'+imgRelativePath+'">');
-
+                
                 // 이미지가 로드되지 않았을 때 새로고침하는 로직 추가
                 setTimeout(function() {
                     var img = $('#graphContainer img');
-                    if (!img || !img[0] || !img[0].complete) {
+                    if (img.length === 0) {
+                        console.log("이미지가 없습니다. 페이지를 새로고침합니다.");
                         location.reload();
+                    } else if (!img[0].complete || img[0].naturalWidth === 0) {
+                        console.log("이미지가 완전히 로드되지 않았습니다. 페이지를 새로고침합니다.");
+                        location.reload();
+                    } else {
+                        console.log("이미지가 성공적으로 로드되었습니다.");
                     }
-                }, 1000); // 1초 대기 후 체크
+                });
             },
             error: function(xhr, status, error) {
                 console.error('Error reloading graph:', status);
