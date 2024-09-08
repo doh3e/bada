@@ -1,8 +1,5 @@
 
-<a href="https://docs.google.com/presentation/d/1hgCvguZBQZwNIgWdQMeYLFomf8ff3Kij/edit?usp=sharing&ouid=115614281961147788111&rtpof=true&sd=true" target="_blank" style="font-size: 30px;">**프레젠테이션 보러가기(click)**</a>
-
-
-
+[**프레젠테이션 보러가기(click)**](https://docs.google.com/presentation/d/1hgCvguZBQZwNIgWdQMeYLFomf8ff3Kij/edit?usp=sharing&ouid=115614281961147788111&rtpof=true&sd=true)
 
 
 
